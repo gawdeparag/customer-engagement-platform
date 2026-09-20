@@ -1,12 +1,13 @@
-import './App.css'
-import DashboardPage from './features/dashboard/pages/DashboardPage'
+import './App.css';
+import DashboardPage from './features/dashboard/pages/DashboardPage';
+import AppLayout from './components/Layout/AppLayout';
 
 function App() {
-  return (
-    <>
-      <DashboardPage />
-    </>
-  )
+	return (
+		<AppLayout>
+			<DashboardPage />
+		</AppLayout>
+	)
 }
 
 export default App
