@@ -1,7 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import AppLayout from './components/Layout/AppLayout.jsx'
-import DashboardPage from './features/dashboard/pages/DashboardPage.jsx'
+import Dashboard from './features/dashboard/Dashboard.jsx'
+import Customers from './features/customers/Customers.jsx';
+import Reports from './features/reports/Reports.jsx';
+import Administration from './features/administration/Administration.jsx';
+import NotFound from './features/not-found/NotFound.jsx';
 
 const router = createBrowserRouter([
   {
@@ -10,8 +14,24 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DashboardPage />,
+        element: <Dashboard />,
       },
+      {
+        path: 'customers',
+        element: <Customers />
+      },
+      {
+        path: 'reports',
+        element: <Reports />
+      },
+      {
+        path: 'administration',
+        element: <Administration />
+      },
+      {
+        path: '*',
+        element: <NotFound />
+      }
     ],
   },
 ])

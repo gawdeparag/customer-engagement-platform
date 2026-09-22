@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 function AppLayout() {
 	return (
@@ -6,6 +7,8 @@ function AppLayout() {
 			<header>
 				Customer Engagement Platform
 			</header>
+
+			<Sidebar />
 
 			<main>
 				<Outlet/>

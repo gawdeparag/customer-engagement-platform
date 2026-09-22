@@ -1,4 +1,4 @@
-import StatCard from "../../../components/Card/StatCard";
+import StatCard from "../../components/Card/StatCard";
 
 function DashboardPage() {
 	const statistics = [
