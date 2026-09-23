@@ -1,6 +1,11 @@
+import { useState } from "react";
 import StatCard from "../../components/Card/StatCard";
 
 function DashboardPage() {
+	const [showDetails, setShowDetails] = useState(false);
+	const [showRevenue, setShowRevenue] = useState(true);
+	// let counter = 0;
+	const [counter, setCounter] = useState(0);
 	const statistics = [
 		{
 			id: 1,
@@ -19,6 +24,14 @@ function DashboardPage() {
 		}
 	];
 
+	function handleToggleDetails() {
+		setShowDetails(!showDetails);
+	}
+
+	// function handleClick() {
+	// 	counter++;
+	// }
+
 	return (
 		<div>
 			<h1>Dashboard</h1>
@@ -34,8 +47,37 @@ function DashboardPage() {
 					/>
 				))}
 			</div>
+
+			<button onClick={handleToggleDetails}>
+				{showDetails ? "Hide Details" : "Show Details"}
+			</button>
+			{showDetails && (
+				<div>
+					<h2>Dashboard Details</h2>
+					<p>Additional dashboard information goes here.</p>
+				</div>
+			)}
+
+			<br/>
+
+			<button onClick={() => setShowRevenue((previousValue) => !previousValue)}>
+				{showRevenue ? "Hide Revenue" : "Show Revenue"}
+			</button>
+			{showRevenue && (
+				<div>
+					<h2>Dashboard Revenue</h2>
+					<p>Additional revenue information goes here.</p>
+				</div>
+			)}
+
+			<br/>
+
+			<button onClick={() => setCounter((previousValue) => previousValue + 1)}>Counter</button>
+			<p>Button clicked {counter} times.</p>
+
+			<br/>
 		</div>
-	);
+	)
 }
 
 export default DashboardPage;
