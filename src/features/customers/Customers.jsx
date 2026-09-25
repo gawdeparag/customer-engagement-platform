@@ -1,7 +1,10 @@
-import CustomerTable from './components/CustomerTable.jsx'
+import { useState } from 'react';
+import CustomerTable from './components/CustomerTable.jsx';
 
 function Customers() {
-    const customers = [
+    // Temporarily disabling the unused variable warning for setCustomers
+    // eslint-disable-next-line no-unused-vars
+    const [customers, setCustomers] = useState([
         {
             id: 1,
             name: 'Rahul Sharma',
@@ -10,7 +13,7 @@ function Customers() {
         },
         {
             id: 2,
-            name: 'Priya Shah',
+            name: 'Indumati Shah',
             company: 'XYZ Corp',
             status: 'Active',
         },
@@ -29,7 +32,7 @@ function Customers() {
         {
             id: 5,
             name: 'Atul Jaware',
-            company: 'PQR Ltd',
+            company: 'ABC Ltd',
             status: 'Active',
         },
         {
@@ -41,34 +44,50 @@ function Customers() {
         {
             id: 7,
             name: 'Suryansh Pandey',
-            company: 'PQR Ltd',
+            company: 'XYZ Ltd',
             status: 'Active',
         },
         {
             id: 8,
             name: 'Parag Rawal',
-            company: 'PQR Ltd',
+            company: 'XYZ Ltd',
             status: 'Inactive',
         },
         {
             id: 9,
             name: 'Siddhant Singh',
-            company: 'PQR Ltd',
+            company: 'ABC Ltd',
             status: 'Inactive',
         },
         {
             id: 10,
             name: 'Mahmad Yunus',
-            company: 'PQR Ltd',
+            company: 'XYZ Ltd',
             status: 'Inactive',
         },
-    ]
+    ]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredCustomers = customers.filter((customer) => {
+        const search = searchTerm.toLowerCase();
+        return (
+            customer.name.toLowerCase().includes(search) ||
+            customer.company.toLowerCase().includes(search) ||
+            customer.status.toLowerCase().includes(search)
+        );
+    });
 
     return (
         <div>
             <h1>Customers</h1>
 
-            <CustomerTable customers={customers} />
+            <input
+                type="text"
+                placeholder="Search customers..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)} />
+
+            <CustomerTable customers={filteredCustomers} />
         </div>
     )
 }
