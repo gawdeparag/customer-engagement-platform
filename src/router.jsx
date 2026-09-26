@@ -6,6 +6,7 @@ import Customers from './features/customers/Customers.jsx';
 import Reports from './features/reports/Reports.jsx';
 import Administration from './features/administration/Administration.jsx';
 import NotFound from './features/not-found/NotFound.jsx';
+import CustomerDetails from './features/customers/CustomerDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: 'customers',
         element: <Customers />
+      },
+      {
+        path: 'customers/:customerId',
+        element: <CustomerDetails />
       },
       {
         path: 'reports',
