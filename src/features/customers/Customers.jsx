@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import CustomerTable from './components/CustomerTable.jsx';
 import customersData from './data/customers.js';
 
@@ -18,6 +19,10 @@ function Customers() {
     return (
         <div>
             <h1>Customers</h1>
+
+            <Link to="/customers/new">
+                Add Customer
+            </Link>
 
             <input
                 type="text"

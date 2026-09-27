@@ -7,6 +7,7 @@ import Reports from './features/reports/Reports.jsx';
 import Administration from './features/administration/Administration.jsx';
 import NotFound from './features/not-found/NotFound.jsx';
 import CustomerDetails from './features/customers/CustomerDetails.jsx';
+import CustomerForm from './features/customers/CustomerForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: 'customers/:customerId',
         element: <CustomerDetails />
+      },
+      {
+        path: 'customers/new',
+        element: <CustomerForm />
       },
       {
         path: 'reports',
