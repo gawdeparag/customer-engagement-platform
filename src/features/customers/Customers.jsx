@@ -5,9 +5,21 @@ import CustomerTable from './components/CustomerTable.jsx'
 import { useCustomers } from './CustomerProvider.jsx'
 
 function Customers() {
-    const { customers } = useCustomers()
+    const {
+        customers,
+        loading,
+        error,
+    } = useCustomers()
 
     const [searchTerm, setSearchTerm] = useState('')
+
+    if (loading) {
+        return <p>Loading customers...</p>
+    }
+
+    if (error) {
+        return <p>{error}</p>
+    }
 
     const filteredCustomers = customers.filter((customer) => {
         const search = searchTerm.toLowerCase()
@@ -38,7 +50,13 @@ function Customers() {
                 />
             </div>
 
-            <CustomerTable customers={filteredCustomers} />
+            {filteredCustomers.length === 0 ? (
+                <p>No customers found.</p>
+            ) : (
+                <CustomerTable
+                    customers={filteredCustomers}
+                />
+            )}
         </div>
     )
 }

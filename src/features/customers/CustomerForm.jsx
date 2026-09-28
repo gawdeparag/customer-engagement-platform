@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
 import { useCustomers } from './CustomerProvider.jsx'
+import './CustomerForm.scss'
 
 function CustomerForm() {
     const { addCustomer } = useCustomers()
@@ -68,7 +68,7 @@ function CustomerForm() {
                     />
 
                     {errors.name && (
-                        <p>{errors.name}</p>
+                        <p className='error-message'>{errors.name}</p>
                     )}
                 </div>
 
@@ -90,7 +90,7 @@ function CustomerForm() {
                     />
 
                     {errors.company && (
-                        <p>{errors.company}</p>
+                        <p className='error-message'>{errors.company}</p>
                     )}
                 </div>
 
