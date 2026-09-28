@@ -8,6 +8,7 @@ import Administration from './features/administration/Administration.jsx';
 import NotFound from './features/not-found/NotFound.jsx';
 import CustomerDetails from './features/customers/CustomerDetails.jsx';
 import CustomerForm from './features/customers/CustomerForm.jsx';
+import { CustomerProvider } from './features/customers/CustomerProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,16 +20,21 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: 'customers',
-        element: <Customers />
-      },
-      {
-        path: 'customers/:customerId',
-        element: <CustomerDetails />
-      },
-      {
-        path: 'customers/new',
-        element: <CustomerForm />
+        element: <CustomerProvider />,
+        children: [
+          {
+            path: 'customers',
+            element: <Customers />,
+          },
+          {
+            path: 'customers/new',
+            element: <CustomerForm />,
+          },
+          {
+            path: 'customers/:customerId',
+            element: <CustomerDetails />,
+          },
+        ],
       },
       {
         path: 'reports',

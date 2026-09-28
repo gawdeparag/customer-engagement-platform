@@ -1,20 +1,23 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import CustomerTable from './components/CustomerTable.jsx';
-import customersData from './data/customers.js';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import CustomerTable from './components/CustomerTable.jsx'
+import { useCustomers } from './CustomerProvider.jsx'
 
 function Customers() {
-    const customers = customersData;
-    const [searchTerm, setSearchTerm] = useState('');
+    const { customers } = useCustomers()
+
+    const [searchTerm, setSearchTerm] = useState('')
 
     const filteredCustomers = customers.filter((customer) => {
-        const search = searchTerm.toLowerCase();
+        const search = searchTerm.toLowerCase()
+
         return (
             customer.name.toLowerCase().includes(search) ||
             customer.company.toLowerCase().includes(search) ||
             customer.status.toLowerCase().includes(search)
-        );
-    });
+        )
+    })
 
     return (
         <div>
@@ -24,11 +27,16 @@ function Customers() {
                 Add Customer
             </Link>
 
-            <input
-                type="text"
-                placeholder="Search customers..."
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)} />
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search customers..."
+                    value={searchTerm}
+                    onChange={(event) =>
+                        setSearchTerm(event.target.value)
+                    }
+                />
+            </div>
 
             <CustomerTable customers={filteredCustomers} />
         </div>
