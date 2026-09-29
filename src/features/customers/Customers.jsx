@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import CustomerTable from './components/CustomerTable.jsx'
@@ -12,6 +12,10 @@ function Customers() {
     } = useCustomers()
 
     const [searchTerm, setSearchTerm] = useState('')
+
+    useEffect(() => {
+        console.log("Search term changed: ",searchTerm);
+    }, [searchTerm])
 
     if (loading) {
         return <p>Loading customers...</p>

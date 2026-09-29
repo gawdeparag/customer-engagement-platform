@@ -1,53 +1,14 @@
-import {
-    createContext,
-    useContext,
-    useEffect,
-    useState,
-} from 'react'
-import { Outlet } from 'react-router-dom';
-import { fetchCustomers } from './services/CustomerService.js';
+import { createContext, useContext } from 'react'
+import { Outlet } from 'react-router-dom'
+
+import useCustomersData from './hooks/useCustomerData'
 
 const CustomerContext = createContext(null)
 
 export function CustomerProvider() {
-    const [customers, setCustomers] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-
-    useEffect(() => {
-        async function loadCustomers() {
-            try {
-                setLoading(true)
-
-                const data = await fetchCustomers()
-
-                setCustomers(data)
-            } catch (error) {
-                setError('Failed to load customers:' + error.message)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        loadCustomers()
-    }, [])
-
-    function addCustomer(customer) {
-        setCustomers((previousCustomers) => [
-            ...previousCustomers,
-            customer,
-        ])
-    }
-
+    const customerData = useCustomersData()
     return (
-        <CustomerContext.Provider
-            value={{
-                customers,
-                loading,
-                error,
-                addCustomer,
-            }}
-        >
+        <CustomerContext.Provider value={customerData}>
             <Outlet />
         </CustomerContext.Provider>
     )
