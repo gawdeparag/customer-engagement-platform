@@ -7,22 +7,23 @@ import { useCustomers } from './CustomerProvider.jsx'
 function Customers() {
     const {
         customers,
-        loading,
+        isLoading,
+        isError,
         error,
     } = useCustomers()
 
     const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() => {
-        console.log("Search term changed: ",searchTerm);
+        console.log("Search term changed: ", searchTerm);
     }, [searchTerm])
 
-    if (loading) {
+    if (isLoading) {
         return <p>Loading customers...</p>
     }
 
-    if (error) {
-        return <p>{error}</p>
+    if (isError) {
+        return <p>{error.message}</p>
     }
 
     const filteredCustomers = customers.filter((customer) => {

@@ -1,44 +1,23 @@
-import { useEffect, useState } from 'react'
-
-import { fetchCustomers } from '../services/CustomerService.js'
+import { useQuery } from "@tanstack/react-query";
+import { fetchCustomers } from "../services/customerService.js";
 
 function useCustomersData() {
-    const [customers, setCustomers] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-
-    useEffect(() => {
-        async function loadCustomers() {
-            try {
-                setLoading(true)
-                setError(null)
-
-                const data = await fetchCustomers()
-
-                setCustomers(data)
-            } catch (error) {
-                setError('Failed to load customers.', error.message)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        loadCustomers()
-    }, [])
-
-    function addCustomer(customer) {
-        setCustomers((previousCustomers) => [
-            ...previousCustomers,
-            customer,
-        ])
-    }
+    const {
+        data: customers,
+        isLoading,
+        isError,
+        error,
+    } = useQuery({
+        queryKey: ["customers"],
+        queryFn: fetchCustomers,
+    });
 
     return {
-        customers,
-        loading,
+        customers: customers ?? [],
+        isLoading,
+        isError,
         error,
-        addCustomer,
-    }
+    };
 }
 
-export default useCustomersData
+export default useCustomersData;
