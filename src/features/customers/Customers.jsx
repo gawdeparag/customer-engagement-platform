@@ -10,6 +10,7 @@ function Customers() {
         isLoading,
         isError,
         error,
+        refetch,
     } = useCustomers()
 
     const [searchTerm, setSearchTerm] = useState('')
@@ -39,6 +40,8 @@ function Customers() {
     return (
         <div>
             <h1>Customers</h1>
+
+            <button onClick={refetch}>Refresh</button>
 
             <Link to="/customers/new">
                 Add Customer
